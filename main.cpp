@@ -1,3 +1,9 @@
+// COMSC 210 | Lab 28 | Annie Morales
+// IDE used: Visual Studio Code
+
+// Eight additional STD algorithms:
+// 1. std::find
+
 #include <iostream>
 #include <fstream>
 #include <iomanip>
@@ -12,6 +18,7 @@ void delete_goat(list<Goat> &trip);
 void add_goat(list<Goat> &trip, string [], string []);
 void display_trip(list<Goat> trip);
 int main_menu();
+void find_goat(list<Goat> trip); // 1st additional std algorithm
 
 int main() {
     srand(time(0));
@@ -58,31 +65,44 @@ int main() {
                 cout << "Displaying goat data.\n";
                 display_trip(trip);
                 break;
+            case 4:
+                cout << "Finding a goat.\n";
+                find_goat(trip);
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
         }
         sel = main_menu();
     }
-    
 
     return 0;
 }
 
 int main_menu() {
-    cout << "*** GOAT MANAGER 3001 ***\n";
+    cout << endl << "*** GOAT MANAGER 3001 ***\n";
     cout << "[1] Add a goat\n";
     cout << "[2] Delete a goat\n";
     cout << "[3] List goats\n";
+    cout << "[4] Find a goat\n";
     cout << "[4] Quit\n";
     cout << "Choice --> ";
     int choice;
-    cin >> choice;
+    cin >> choice; cout << endl;
     while (choice < 1 || choice > 4) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
     return choice;
+}
+
+void find_goat(list<Goat> trip){
+    cout << "FINDING A GOAT\n";
+    auto it = find(trip.begin(), trip.end(), goat);
+    if (it != trip.end())
+        cout << *it << "has been found." << endl;
+    else
+        cout << *it < " has not been found."
 }
 
 void delete_goat(list<Goat> &trip) {
