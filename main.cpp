@@ -12,6 +12,8 @@
 #include <algorithm>
 #include <numeric>
 #include <random>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 const int SZ_NAMES = 200, SZ_COLORS = 25;
@@ -24,7 +26,8 @@ int main_menu();
 //string find_goat(list<Goat> trip); 
 //void shuffle_goats(list<Goat> trip);
 //void unique_goats(list<Goat> &trip);
-void sorting_goats(list<Goat> &trip);
+void sorting_goats(list<Goat> &trip); // 1st addition
+void reverse_goats(list<Goat> trip); // 2nd addition
 
 
 int main() {
@@ -45,7 +48,7 @@ int main() {
 
     // create & populate a trip of Goats using std::list of random size 8-15
     int tripSize = rand() % 8 + 8;
-    list<Goat> trip;
+    list<Goat> trip; // List of goats on the trip.
     int age;
     string name, color;
     for (int i = 0; i < tripSize; i++) {
@@ -76,6 +79,10 @@ int main() {
                 cout << "Sorting goats by name.\n";
                 sorting_goats(trip);
                 break;
+            case 5:
+                cout << "Reversing order of goats.\n";
+                reverse_goats(trip);
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -90,7 +97,8 @@ int main_menu() {
     cout << "[1] Add a goat\n";
     cout << "[2] Delete a goat\n";
     cout << "[3] List goats\n";
-    cout << "[4] Sort goats by name\n";
+    cout << "[4] Sort goats by name\n"; // Addition 1
+    cout << "[5] Reverse order of goats\n"; 
     cout << "[5] Quit\n";
     cout << "Choice --> ";
     int choice;
@@ -102,7 +110,10 @@ int main_menu() {
     return choice;
 }
 
-void sorting_goats(list<Goat> &trip){
+// sorting_goats sorts the names of goats alphabetically.
+// arguments: list of goats on the trip.
+// returns: nothing.
+void sorting_goats(list<Goat> &trip){ // Milestone 1
     list<Goat> goats_sorted(trip);
     // sort the copy by goat name
     goats_sorted.sort([](const Goat &a, const Goat &b){
@@ -111,6 +122,17 @@ void sorting_goats(list<Goat> &trip){
     cout << "Goats sorted by name:\n";
     for (const Goat &g : goats_sorted)
         cout << g.get_name() << " (" << g.get_age() << ", " << g.get_color() << ")\n";
+}
+
+// reverse_goats reverses the order of goats in the list.
+// arguments: list of goats on the  trip.
+// returns: nothing.
+void reverse_goats(list<Goat> trip){
+    list<Goat> goats_reversed(trip);
+    // reverseing list of goats
+    reverse(trip.begin(), trip.end());
+    cout << "Goats in reverse order:\n";
+    for (const Goat &g : goats_reversed)
 }
 
 /*
