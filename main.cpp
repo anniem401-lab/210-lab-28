@@ -2,13 +2,16 @@
 // IDE used: Visual Studio Code
 
 // Eight additional STD algorithms:
-// 1. std::find
+// 1. 
 
 #include <iostream>
 #include <fstream>
 #include <iomanip>
 #include <list>
 #include "Goat.h"
+#include <algorithm>
+#include <numeric>
+#include <random>
 using namespace std;
 
 const int SZ_NAMES = 200, SZ_COLORS = 25;
@@ -18,7 +21,10 @@ void delete_goat(list<Goat> &trip);
 void add_goat(list<Goat> &trip, string [], string []);
 void display_trip(list<Goat> trip);
 int main_menu();
-void find_goat(list<Goat> trip); // 1st additional std algorithm
+//string find_goat(list<Goat> trip); 
+//void shuffle_goats(list<Goat> trip);
+void unique_goats(list<Goat> trip);
+
 
 int main() {
     srand(time(0));
@@ -51,7 +57,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 4) {
+    while (sel != 5) {
         switch (sel) {
             case 1:
                 cout << "Adding a goat.\n";
@@ -66,8 +72,8 @@ int main() {
                 display_trip(trip);
                 break;
             case 4:
-                cout << "Finding a goat.\n";
-                find_goat(trip);
+                cout << "Have unique goats.\n";
+                unique_goats(trip);
                 break;
             default:
                 cout << "Invalid selection.\n";
@@ -75,7 +81,6 @@ int main() {
         }
         sel = main_menu();
     }
-
     return 0;
 }
 
@@ -84,26 +89,45 @@ int main_menu() {
     cout << "[1] Add a goat\n";
     cout << "[2] Delete a goat\n";
     cout << "[3] List goats\n";
-    cout << "[4] Find a goat\n";
-    cout << "[4] Quit\n";
+    cout << "[4] Have unique goats\n";
+    cout << "[5] Quit\n";
     cout << "Choice --> ";
     int choice;
     cin >> choice; cout << endl;
-    while (choice < 1 || choice > 4) {
+    while (choice < 1 || choice > 5) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
     return choice;
 }
 
-void find_goat(list<Goat> trip){
-    cout << "FINDING A GOAT\n";
-    auto it = find(trip.begin(), trip.end(), goat);
-    if (it != trip.end())
-        cout << *it << "has been found." << endl;
-    else
-        cout << *it < " has not been found."
+void unique_goats(list<Goat> trip){
+    auto newEnd = unique(trip.begin(), trip.end());
+    trip.erase(newEnd, trip.end());
 }
+
+/*
+// shuffle_goat shuffles the goats in the list.
+void shuffle_goat(list<Goat> trip){
+    shuffle(trip.begin(), trip.end(), default_random_engine());
+    display_trip(trip);
+}
+*/
+
+/*
+    string find_goat(list<Goat> trip){
+    cout << "FINDING A GOAT\n";
+    cout << "Finding Kurt:";
+    auto it = find(trip.begin(), trip.end(), [&](const Goat& g){ return g.get_name() == "Kurt"; });
+    if (it != trip.end())
+        cout << it->name << "has been found." << endl;
+    else
+        cout << it->name << " has not been found.";
+
+    return name;
+}
+*/
+
 
 void delete_goat(list<Goat> &trip) {
     cout << "DELETE A GOAT\n";
@@ -140,7 +164,7 @@ int select_goat(list<Goat> trp) {
     display_trip(trp);
     cout << "Choice --> ";
     cin >> input;
-    while (input < 1 or input > trp.size()) {
+    while (input < 1 || input > trp.size()) {
         cout << "Invalid choice, again --> ";
         cin >> input;
     }
