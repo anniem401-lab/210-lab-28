@@ -1,8 +1,7 @@
 // COMSC 210 | Lab 28 | Annie Morales
 // IDE used: Visual Studio Code
 
-// Eight additional STD algorithms:
-// 1. 
+// Eight additional STD algorithms
 
 #include <iostream>
 #include <fstream>
@@ -28,6 +27,7 @@ int main_menu();
 //void unique_goats(list<Goat> &trip);
 void sorting_goats(list<Goat> &trip); // 1st addition
 void reverse_goats(list<Goat> trip); // 2nd addition
+void clear_goats(list<Goat> trip); // 3rd addition
 
 
 int main() {
@@ -61,7 +61,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 5) {
+    while (sel != 7) {
         switch (sel) {
             case 1:
                 cout << "Adding a goat.\n";
@@ -83,6 +83,10 @@ int main() {
                 cout << "Reversing order of goats.\n";
                 reverse_goats(trip);
                 break;
+            case 6:
+                cout << "Clearing list of goats.\n";
+                clear_goats(trip);
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -98,12 +102,13 @@ int main_menu() {
     cout << "[2] Delete a goat\n";
     cout << "[3] List goats\n";
     cout << "[4] Sort goats by name\n"; // Addition 1
-    cout << "[5] Reverse order of goats\n"; 
-    cout << "[5] Quit\n";
+    cout << "[5] Reverse order of goats\n"; // Addition 2 
+    cout << "[6] Clear list of goats.\n"; // Addition 3
+    cout << "[7] Quit\n";
     cout << "Choice --> ";
     int choice;
     cin >> choice; cout << endl;
-    while (choice < 1 || choice > 5) {
+    while (choice < 1 || choice > 7) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -119,20 +124,28 @@ void sorting_goats(list<Goat> &trip){ // Milestone 1
     goats_sorted.sort([](const Goat &a, const Goat &b){
         return a.get_name() < b.get_name();
     });
-    cout << "Goats sorted by name:\n";
     for (const Goat &g : goats_sorted)
         cout << g.get_name() << " (" << g.get_age() << ", " << g.get_color() << ")\n";
 }
 
 // reverse_goats reverses the order of goats in the list.
-// arguments: list of goats on the  trip.
+// arguments: list of goats on the trip.
 // returns: nothing.
-void reverse_goats(list<Goat> trip){
+void reverse_goats(list<Goat> trip){ // Milestone 2
     list<Goat> goats_reversed(trip);
-    // reverseing list of goats
+    // reversing list of goats
     reverse(trip.begin(), trip.end());
     cout << "Goats in reverse order:\n";
     for (const Goat &g : goats_reversed)
+    cout << g.get_name() << " (" << g.get_age() << ", " << g.get_color() << ")\n";
+}
+
+// clear_goats removes all the goats from the list.
+// arguments: list of goats.
+// returns: nothing.
+void clear_goats(list<Goat> list){
+    list.clear();
+
 }
 
 /*
