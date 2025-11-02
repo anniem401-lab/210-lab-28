@@ -23,7 +23,8 @@ void display_trip(list<Goat> trip);
 int main_menu();
 //string find_goat(list<Goat> trip); 
 //void shuffle_goats(list<Goat> trip);
-void unique_goats(list<Goat> trip);
+//void unique_goats(list<Goat> &trip);
+void sorting_goats(list<Goat> &trip);
 
 
 int main() {
@@ -72,8 +73,8 @@ int main() {
                 display_trip(trip);
                 break;
             case 4:
-                cout << "Have unique goats.\n";
-                unique_goats(trip);
+                cout << "Sorting goats by name.\n";
+                sorting_goats(trip);
                 break;
             default:
                 cout << "Invalid selection.\n";
@@ -89,7 +90,7 @@ int main_menu() {
     cout << "[1] Add a goat\n";
     cout << "[2] Delete a goat\n";
     cout << "[3] List goats\n";
-    cout << "[4] Have unique goats\n";
+    cout << "[4] Sort goats by name\n";
     cout << "[5] Quit\n";
     cout << "Choice --> ";
     int choice;
@@ -101,10 +102,22 @@ int main_menu() {
     return choice;
 }
 
-void unique_goats(list<Goat> trip){
-    auto newEnd = unique(trip.begin(), trip.end());
-    trip.erase(newEnd, trip.end());
+void sorting_goats(list<Goat> &trip){
+    list<Goat> goats_sorted(trip);
+    // sort the copy by goat name
+    goats_sorted.sort([](const Goat &a, const Goat &b){
+        return a.get_name() < b.get_name();
+    });
+    cout << "Goats sorted by name:\n";
+    for (const Goat &g : goats_sorted)
+        cout << g.get_name() << " (" << g.get_age() << ", " << g.get_color() << ")\n";
 }
+
+/*
+void unique_goats(list<Goat> &trip){
+    trip.unique();
+}
+*/
 
 /*
 // shuffle_goat shuffles the goats in the list.
