@@ -29,7 +29,7 @@ void shuffle_goats(list<Goat> &trip); // 4th addition
 void find_goat(list<Goat> &trip); // 5th addition
 void count_age(list<Goat> &trip); // 6th addition
 void increase_age(list<Goat> &trip); //7th addition
-void swap_goats(list<Goat> &trip); // 8th addition
+void is_sorted (list<Goat> &trip); // 8th addition
 
 int main() {
     srand(time(0));
@@ -62,7 +62,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 11) {
+    while (sel != 12) {
         switch (sel) {
             case 1:
                 cout << "Adding a goat...\n";
@@ -103,6 +103,10 @@ int main() {
                 cout << "Increasing goat ages by 1...\n";
                 increase_age(trip);
                 break;
+            case 11:
+                cout << "Checking if sorted...\n";
+                is_sorted(trip);
+                break;
         }
         sel = main_menu();
     }
@@ -121,11 +125,12 @@ int main_menu() {
     cout << "[8] Find a goat.\n"; // Addition 5
     cout << "[9] Count occurance of an age.\n"; // Addition 6
     cout << "[10] Increase age of all goats by 1.\n"; // Addition 7
-    cout << "[11] Quit\n";
+    cout << "[11] Check if list is sorted.\n"; // Addition 8
+    cout << "[12] Quit\n";
     cout << "Choice --> ";
     int choice;
     cin >> choice; cout << endl;
-    while (choice < 1 || choice > 11) {
+    while (choice < 1 || choice > 12) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -214,8 +219,12 @@ void increase_age(list<Goat> &trip){ // Milestone 7
     display_trip(trip);
 }
 
-void swap_goats(list<Goat> &trip){
-    cout << "Choose goats to swap: ";
+void is_sorted(list<Goat> &trip){
+    //list<Goat> goats_sorted(trip);
+    if (is_sorted(trip.begin(), trip.end()))
+        cout << "Sorted";
+    else
+        cout << "Not sorted" << endl;
 }
 
 void delete_goat(list<Goat> &trip) {
