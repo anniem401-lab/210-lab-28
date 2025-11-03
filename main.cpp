@@ -27,7 +27,7 @@ void reverse_goats(list<Goat> &trip); // 2nd addition
 void clear_goats(list<Goat> trip); // 3rd addition
 void shuffle_goats(list<Goat> &trip); // 4th addition
 void find_goat(list<Goat> &trip); // 5th addition
-int count_age(list<Goat> &trip); // 6th addition
+void count_age(list<Goat> &trip); // 6th addition
 
 int main() {
     srand(time(0));
@@ -97,9 +97,6 @@ int main() {
             case 9:
                 cout << "Counting occurance of an age...\n";
                 count_age(trip);
-            default:
-                cout << "Invalid selection.\n";
-                break;
         }
         sel = main_menu();
     }
@@ -194,13 +191,9 @@ void find_goat(list<Goat> &trip){ // Milestone 5
 // count_age will count the occurance of an age.
 // arguments: list of goats.
 // returns; nothing.
-int count_age(list<Goat> &trip){
-    int age;
-    cout << "Enter an age:"; cin >> age; cin.ignore (1000, 10);
-    cout << count(trip.begin(), trip.end(), age);
-    if (age)
-        cout << age;
-    return 0;
+void count_age(list<Goat> &trip){
+    int occurances = count_if(trip.begin(), trip.end(), [&](const Goat &g) { return g.get_age() == 5; });
+        cout << "Goats with age 5 occur " << occurances << " times." << endl;
 }
 
 void delete_goat(list<Goat> &trip) {
