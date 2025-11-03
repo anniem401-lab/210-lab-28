@@ -26,7 +26,7 @@ int main_menu();
 //void shuffle_goats(list<Goat> trip);
 //void unique_goats(list<Goat> &trip);
 void sorting_goats(list<Goat> &trip); // 1st addition
-void reverse_goats(list<Goat> trip); // 2nd addition
+void reverse_goats(list<Goat> &trip); // 2nd addition
 void clear_goats(list<Goat> trip); // 3rd addition
 
 
@@ -64,27 +64,27 @@ int main() {
     while (sel != 7) {
         switch (sel) {
             case 1:
-                cout << "Adding a goat.\n";
+                cout << "Adding a goat...\n";
                 add_goat(trip, names, colors);
                 break;
             case 2:    
-                cout << "Removing a goat.\n";
+                cout << "Removing a goat...\n";
                 delete_goat(trip);
                 break;
             case 3:    
-                cout << "Displaying goat data.\n";
+                cout << "Displaying goat data...\n";
                 display_trip(trip);
                 break;
             case 4:
-                cout << "Sorting goats by name.\n";
+                cout << "Sorting goats by name...\n";
                 sorting_goats(trip);
                 break;
             case 5:
-                cout << "Reversing order of goats.\n";
+                cout << "Reversing order of goats...\n";
                 reverse_goats(trip);
                 break;
             case 6:
-                cout << "Clearing list of goats.\n";
+                cout << "Clearing list of goats...\n";
                 clear_goats(trip);
                 break;
             default:
@@ -124,20 +124,21 @@ void sorting_goats(list<Goat> &trip){ // Milestone 1
     goats_sorted.sort([](const Goat &a, const Goat &b){
         return a.get_name() < b.get_name();
     });
+    int i = 1;
+    cout << "Goats have been sorted alphabetically by name." << endl;
     for (const Goat &g : goats_sorted)
-        cout << g.get_name() << " (" << g.get_age() << ", " << g.get_color() << ")\n";
+        cout << "\t" << "[" << i++ << "] " << g.get_name() << " (" << g.get_age() << ", " << g.get_color() << ")\n";
 }
 
 // reverse_goats reverses the order of goats in the list.
 // arguments: list of goats on the trip.
 // returns: nothing.
-void reverse_goats(list<Goat> trip){ // Milestone 2
+void reverse_goats(list<Goat> &trip){ // Milestone 2
     list<Goat> goats_reversed(trip);
     // reversing list of goats
     reverse(trip.begin(), trip.end());
     cout << "Goats in reverse order:\n";
-    for (const Goat &g : goats_reversed)
-    cout << g.get_name() << " (" << g.get_age() << ", " << g.get_color() << ")\n";
+    display_trip(trip);
 }
 
 // clear_goats removes all the goats from the list.
