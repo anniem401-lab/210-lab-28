@@ -1,7 +1,7 @@
 // COMSC 210 | Lab 28 | Annie Morales
 // IDE used: Visual Studio Code
 
-// Eight additional STD algorithms
+// Eight additional STL algorithms
 
 #include <iostream>
 #include <fstream>
@@ -23,12 +23,11 @@ void add_goat(list<Goat> &trip, string [], string []);
 void display_trip(list<Goat> trip);
 int main_menu();
 //string find_goat(list<Goat> trip); 
-//void shuffle_goats(list<Goat> trip);
 //void unique_goats(list<Goat> &trip);
 void sorting_goats(list<Goat> &trip); // 1st addition
 void reverse_goats(list<Goat> &trip); // 2nd addition
 void clear_goats(list<Goat> trip); // 3rd addition
-
+//void shuffle_goats(list<Goat> trip); // 4th addition
 
 int main() {
     srand(time(0));
@@ -61,7 +60,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 7) {
+    while (sel != 8) {
         switch (sel) {
             case 1:
                 cout << "Adding a goat...\n";
@@ -87,6 +86,10 @@ int main() {
                 cout << "Clearing list of goats...\n";
                 clear_goats(trip);
                 break;
+            case 7:
+                cout << "Shuffling goats...\n";
+                //shuffle_goats(trip);
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -104,11 +107,12 @@ int main_menu() {
     cout << "[4] Sort goats by name\n"; // Addition 1
     cout << "[5] Reverse order of goats\n"; // Addition 2 
     cout << "[6] Clear list of goats.\n"; // Addition 3
-    cout << "[7] Quit\n";
+    cout << "[7] Shuffle goats.\n"; // Addition 4
+    cout << "[8] Quit\n";
     cout << "Choice --> ";
     int choice;
     cin >> choice; cout << endl;
-    while (choice < 1 || choice > 7) {
+    while (choice < 1 || choice > 8) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -144,22 +148,23 @@ void reverse_goats(list<Goat> &trip){ // Milestone 2
 // clear_goats removes all the goats from the list.
 // arguments: list of goats.
 // returns: nothing.
-void clear_goats(list<Goat> list){
-    list.clear();
-
+void clear_goats(list<Goat> trip){ // Milestone 3
+    cout << "Size before clearing list of goats: " << trip.size() << endl;
+    trip.clear();
+    cout << "Goats have been cleared from the list. Size now: " << trip.size() << endl;
 }
-
-/*
-void unique_goats(list<Goat> &trip){
-    trip.unique();
-}
-*/
 
 /*
 // shuffle_goat shuffles the goats in the list.
 void shuffle_goat(list<Goat> trip){
     shuffle(trip.begin(), trip.end(), default_random_engine());
     display_trip(trip);
+}
+*/
+
+/*
+void unique_goats(list<Goat> &trip){
+    trip.unique();
 }
 */
 
