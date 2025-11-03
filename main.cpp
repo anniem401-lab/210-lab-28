@@ -29,6 +29,7 @@ void shuffle_goats(list<Goat> &trip); // 4th addition
 void find_goat(list<Goat> &trip); // 5th addition
 void count_age(list<Goat> &trip); // 6th addition
 void increase_age(list<Goat> &trip); //7th addition
+void swap_goats(list<Goat> &trip); // 8th addition
 
 int main() {
     srand(time(0));
@@ -61,7 +62,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 10) {
+    while (sel != 11) {
         switch (sel) {
             case 1:
                 cout << "Adding a goat...\n";
@@ -98,6 +99,10 @@ int main() {
             case 9:
                 cout << "Counting occurance of an age...\n";
                 count_age(trip);
+            case 10:
+                cout << "Increasing goat ages by 1...\n";
+                increase_age(trip);
+                break;
         }
         sel = main_menu();
     }
@@ -115,11 +120,12 @@ int main_menu() {
     cout << "[7] Shuffle goats.\n"; // Addition 4
     cout << "[8] Find a goat.\n"; // Addition 5
     cout << "[9] Count occurance of an age.\n"; // Addition 6
-    cout << "[10] Quit\n";
+    cout << "[10] Increase age of all goats by 1.\n"; // Addition 7
+    cout << "[11] Quit\n";
     cout << "Choice --> ";
     int choice;
     cin >> choice; cout << endl;
-    while (choice < 1 || choice > 10) {
+    while (choice < 1 || choice > 11) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -192,16 +198,24 @@ void find_goat(list<Goat> &trip){ // Milestone 5
 // count_age will count the occurance of an age.
 // arguments: list of goats.
 // returns; nothing.
-void count_age(list<Goat> &trip){
+void count_age(list<Goat> &trip){ // Milestone 6
     int age;
     cout << "Enter an age to count its occurances: "; cin >> age; cin.ignore(1000, 10);
     int occurances = count_if(trip.begin(), trip.end(), [&](const Goat &g) { return g.get_age() == age; });
         cout << "Goats with age " << age << " occur " << occurances << " times." << endl;
 }
 
-void increase_age(list<Goat> &trip){
-    for_each(trip.begin(), trip.end(), [&](const Goat &g) {g.get_age() += 1;});
-    
+// increase_age will increase the age of each goat by 1.
+// arguments: list of goats.
+// returns: nothing.
+void increase_age(list<Goat> &trip){ // Milestone 7
+    cout << "Ages of all goats have been increased." << endl;
+    for_each(trip.begin(), trip.end(), [](Goat &g) { g.set_age(g.get_age() + 1); });
+    display_trip(trip);
+}
+
+void swap_goats(list<Goat> &trip){
+    cout << "Choose goats to swap: ";
 }
 
 void delete_goat(list<Goat> &trip) {
