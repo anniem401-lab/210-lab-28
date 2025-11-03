@@ -113,7 +113,7 @@ int main_menu() {
     cout << "[6] Clear list of goats.\n"; // Addition 3
     cout << "[7] Shuffle goats.\n"; // Addition 4
     cout << "[8] Find a goat.\n"; // Addition 5
-    cout << "[9] Count occurance of an age.\n"; // Addition 6
+    cout << "[9] Count occurance of age 5.\n"; // Addition 6
     cout << "[10] Quit\n";
     cout << "Choice --> ";
     int choice;
