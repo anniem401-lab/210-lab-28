@@ -22,12 +22,12 @@ void delete_goat(list<Goat> &trip);
 void add_goat(list<Goat> &trip, string [], string []);
 void display_trip(list<Goat> trip);
 int main_menu();
-//void unique_goats(list<Goat> &trip);
 void sorting_goats(list<Goat> &trip); // 1st addition
 void reverse_goats(list<Goat> &trip); // 2nd addition
 void clear_goats(list<Goat> trip); // 3rd addition
 void shuffle_goats(list<Goat> &trip); // 4th addition
 void find_goat(list<Goat> &trip); // 5th addition
+int count_age(list<Goat> &trip); // 6th addition
 
 int main() {
     srand(time(0));
@@ -60,7 +60,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 9) {
+    while (sel != 10) {
         switch (sel) {
             case 1:
                 cout << "Adding a goat...\n";
@@ -94,6 +94,9 @@ int main() {
                 cout << "Finding a goat...\n";
                 find_goat(trip);
                 break;
+            case 9:
+                cout << "Counting occurance of an age...\n";
+                count_age(trip);
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -113,11 +116,12 @@ int main_menu() {
     cout << "[6] Clear list of goats.\n"; // Addition 3
     cout << "[7] Shuffle goats.\n"; // Addition 4
     cout << "[8] Find a goat.\n"; // Addition 5
-    cout << "[9] Quit\n";
+    cout << "[9] Count occurance of an age.\n"; // Addition 6
+    cout << "[10] Quit\n";
     cout << "Choice --> ";
     int choice;
     cin >> choice; cout << endl;
-    while (choice < 1 || choice > 9) {
+    while (choice < 1 || choice > 10) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -187,11 +191,17 @@ void find_goat(list<Goat> &trip){ // Milestone 5
     }
 }
 
-/*
-void unique_goats(list<Goat> &trip){
-    trip.unique();
+// count_age will count the occurance of an age.
+// arguments: list of goats.
+// returns; nothing.
+int count_age(list<Goat> &trip){
+    int age;
+    cout << "Enter an age:"; cin >> age; cin.ignore (1000, 10);
+    cout << count(trip.begin(), trip.end(), age);
+    if (age)
+        cout << age;
+    return 0;
 }
-*/
 
 void delete_goat(list<Goat> &trip) {
     cout << "DELETE A GOAT\n";
