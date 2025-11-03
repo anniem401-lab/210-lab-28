@@ -28,6 +28,7 @@ void clear_goats(list<Goat> trip); // 3rd addition
 void shuffle_goats(list<Goat> &trip); // 4th addition
 void find_goat(list<Goat> &trip); // 5th addition
 void count_age(list<Goat> &trip); // 6th addition
+void increase_age(list<Goat> &trip); //7th addition
 
 int main() {
     srand(time(0));
@@ -113,7 +114,7 @@ int main_menu() {
     cout << "[6] Clear list of goats.\n"; // Addition 3
     cout << "[7] Shuffle goats.\n"; // Addition 4
     cout << "[8] Find a goat.\n"; // Addition 5
-    cout << "[9] Count occurance of age 5.\n"; // Addition 6
+    cout << "[9] Count occurance of an age.\n"; // Addition 6
     cout << "[10] Quit\n";
     cout << "Choice --> ";
     int choice;
@@ -192,8 +193,15 @@ void find_goat(list<Goat> &trip){ // Milestone 5
 // arguments: list of goats.
 // returns; nothing.
 void count_age(list<Goat> &trip){
-    int occurances = count_if(trip.begin(), trip.end(), [&](const Goat &g) { return g.get_age() == 5; });
-        cout << "Goats with age 5 occur " << occurances << " times." << endl;
+    int age;
+    cout << "Enter an age to count its occurances: "; cin >> age; cin.ignore(1000, 10);
+    int occurances = count_if(trip.begin(), trip.end(), [&](const Goat &g) { return g.get_age() == age; });
+        cout << "Goats with age " << age << " occur " << occurances << " times." << endl;
+}
+
+void increase_age(list<Goat> &trip){
+    for_each(trip.begin(), trip.end(), [&](const Goat &g) {g.get_age() += 1;});
+    
 }
 
 void delete_goat(list<Goat> &trip) {
