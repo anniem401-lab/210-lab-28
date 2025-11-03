@@ -22,12 +22,12 @@ void delete_goat(list<Goat> &trip);
 void add_goat(list<Goat> &trip, string [], string []);
 void display_trip(list<Goat> trip);
 int main_menu();
-//string find_goat(list<Goat> trip); 
 //void unique_goats(list<Goat> &trip);
 void sorting_goats(list<Goat> &trip); // 1st addition
 void reverse_goats(list<Goat> &trip); // 2nd addition
 void clear_goats(list<Goat> trip); // 3rd addition
-//void shuffle_goats(list<Goat> trip); // 4th addition
+void shuffle_goats(list<Goat> &trip); // 4th addition
+//void find_goat(list<Goat> trip); // 5th addition
 
 int main() {
     srand(time(0));
@@ -88,7 +88,7 @@ int main() {
                 break;
             case 7:
                 cout << "Shuffling goats...\n";
-                //shuffle_goats(trip);
+                shuffle_goats(trip);
                 break;
             default:
                 cout << "Invalid selection.\n";
@@ -154,21 +154,19 @@ void clear_goats(list<Goat> trip){ // Milestone 3
     cout << "Goats have been cleared from the list. Size now: " << trip.size() << endl;
 }
 
-/*
 // shuffle_goat shuffles the goats in the list.
-void shuffle_goat(list<Goat> trip){
-    shuffle(trip.begin(), trip.end(), default_random_engine());
+// arguments: list of goats.
+// returns: nothing.
+void shuffle_goats(list<Goat> &trip){ // Milestone 4
+    vector<Goat> vec_goats(trip.begin(), trip.end());
+    shuffle(vec_goats.begin(), vec_goats.end(), default_random_engine(time(0)));
+    trip.assign(vec_goats.begin(), vec_goats.end());
+    cout << "Goats have been shuffled." << endl;
     display_trip(trip);
 }
-*/
 
 /*
-void unique_goats(list<Goat> &trip){
-    trip.unique();
-}
-*/
-
-/*
+    // find_ goat will find
     string find_goat(list<Goat> trip){
     cout << "FINDING A GOAT\n";
     cout << "Finding Kurt:";
@@ -182,6 +180,11 @@ void unique_goats(list<Goat> &trip){
 }
 */
 
+/*
+void unique_goats(list<Goat> &trip){
+    trip.unique();
+}
+*/
 
 void delete_goat(list<Goat> &trip) {
     cout << "DELETE A GOAT\n";
