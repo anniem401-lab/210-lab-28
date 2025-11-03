@@ -27,7 +27,7 @@ void sorting_goats(list<Goat> &trip); // 1st addition
 void reverse_goats(list<Goat> &trip); // 2nd addition
 void clear_goats(list<Goat> trip); // 3rd addition
 void shuffle_goats(list<Goat> &trip); // 4th addition
-//void find_goat(list<Goat> trip); // 5th addition
+void find_goat(list<Goat> &trip); // 5th addition
 
 int main() {
     srand(time(0));
@@ -90,6 +90,10 @@ int main() {
                 cout << "Shuffling goats...\n";
                 shuffle_goats(trip);
                 break;
+            case 8:
+                cout << "Finding a goat...\n";
+                find_goat(trip);
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -108,6 +112,7 @@ int main_menu() {
     cout << "[5] Reverse order of goats\n"; // Addition 2 
     cout << "[6] Clear list of goats.\n"; // Addition 3
     cout << "[7] Shuffle goats.\n"; // Addition 4
+    cout << "[8] Find a goat.\n"; // Addition 5
     cout << "[8] Quit\n";
     cout << "Choice --> ";
     int choice;
@@ -165,20 +170,19 @@ void shuffle_goats(list<Goat> &trip){ // Milestone 4
     display_trip(trip);
 }
 
-/*
-    // find_ goat will find
-    string find_goat(list<Goat> trip){
-    cout << "FINDING A GOAT\n";
-    cout << "Finding Kurt:";
-    auto it = find(trip.begin(), trip.end(), [&](const Goat& g){ return g.get_name() == "Kurt"; });
+// find_ goat will find a goat.
+// arguments: list of goats.
+// returns: nothing.
+void find_goat(list<Goat> &trip){
+    string name;
+    cout << "Enter the name of the goat you're looking for: "; cin >> name; 
+    cout << "Finding" << name << "...";
+    auto it = find(trip.begin(), trip.end(), [&](const Goat& g){ return g.get_name() == name; });
     if (it != trip.end())
-        cout << it->name << "has been found." << endl;
+        cout << it->get_name() << "has been found." << endl;
     else
-        cout << it->name << " has not been found.";
-
-    return name;
+        cout << it->get_name() << " has not been found.";
 }
-*/
 
 /*
 void unique_goats(list<Goat> &trip){
