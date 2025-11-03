@@ -60,7 +60,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 8) {
+    while (sel != 9) {
         switch (sel) {
             case 1:
                 cout << "Adding a goat...\n";
@@ -113,11 +113,11 @@ int main_menu() {
     cout << "[6] Clear list of goats.\n"; // Addition 3
     cout << "[7] Shuffle goats.\n"; // Addition 4
     cout << "[8] Find a goat.\n"; // Addition 5
-    cout << "[8] Quit\n";
+    cout << "[9] Quit\n";
     cout << "Choice --> ";
     int choice;
     cin >> choice; cout << endl;
-    while (choice < 1 || choice > 8) {
+    while (choice < 1 || choice > 9) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -173,15 +173,18 @@ void shuffle_goats(list<Goat> &trip){ // Milestone 4
 // find_ goat will find a goat.
 // arguments: list of goats.
 // returns: nothing.
-void find_goat(list<Goat> &trip){
-    string name;
-    cout << "Enter the name of the goat you're looking for: "; cin >> name; 
-    cout << "Finding" << name << "...";
-    auto it = find(trip.begin(), trip.end(), [&](const Goat& g){ return g.get_name() == name; });
-    if (it != trip.end())
-        cout << it->get_name() << "has been found." << endl;
-    else
-        cout << it->get_name() << " has not been found.";
+void find_goat(list<Goat> &trip){ // Milestone 5
+    string goat_name;
+    cout << "Enter the name of the goat you're looking for: "; cin >> goat_name; 
+    cin.ignore(1000 ,10);
+    cout << "Finding " << goat_name << "..." << endl;
+    auto it = find_if(trip.begin(), trip.end(), [&](const Goat& g) { return g.get_name() == goat_name; });
+    if (it != trip.end()){
+        cout << "Goat has been found: " << it->get_name() << " (" << it->get_age() << ", " << it->get_color() << ")" << endl;
+    }
+    else{
+        cout << goat_name << " has not been found.";
+    }
 }
 
 /*
